@@ -1,0 +1,222 @@
+<button type="button" id="up" aria-label="மேலே செல்">↑</button>
+<script>
+function boot(lang){
+const EN=lang==="en";if(window.__ac)window.__ac.abort();window.__ac=new AbortController();const SIG=window.__ac.signal;
+document.documentElement.lang=lang;document.getElementById("main").innerHTML=document.getElementById("tpl-"+lang).innerHTML;
+const I={
+ history:'<path d="M4 21h16M6 21v-4h12v4M7.5 17v-3.5h9V17M9 13.500v-3h6v3M10.500 10.500V8h3v2.500M12 8V4"/>',
+ language:'<text x="12" y="17.500" text-anchor="middle" font-size="15" font-family="Arima,Anek Tamil,sans-serif" fill="currentColor" stroke="none">அ</text>',
+ literature:'<rect x="3" y="6" width="18" height="4" rx="1"/><rect x="3" y="10" width="18" height="4" rx="1"/><rect x="3" y="14" width="18" height="4" rx="1"/><circle cx="7" cy="12" r=".6"/>',
+ culture:'<path d="M12 3l9 9-9 9-9-9z"/><path d="M12 8l4 4-4 4-4-4z"/><circle cx="12" cy="12" r=".8"/>',
+ faith:'<path d="M12 3c2 2.500 2.500 4 0 6.500C9.500 7 10 5.500 12 3z"/><path d="M5 12h14c0 3-3 5-7 5s-7-2-7-5zM9 21h6M12 17v4"/>',
+ arts:'<circle cx="11" cy="13" r="7"/><circle cx="11" cy="13" r="3"/><path d="M16 5l5-2M17 8l4 0"/>',
+ games:'<rect x="2" y="7" width="20" height="10" rx="5"/><circle cx="7" cy="10" r=".9"/><circle cx="12" cy="10" r=".9"/><circle cx="17" cy="10" r=".9"/><circle cx="7" cy="14" r=".9"/><circle cx="12" cy="14" r=".9"/><circle cx="17" cy="14" r=".9"/>',
+ festivals:'<path d="M6 11h12c0 5-2 9-6 9s-6-4-6-9zM5 11h14M9 8c0-1.500 1.500-1.500 1.500-3M13 8c0-1.500 1.500-1.500 1.500-3"/>',
+ knowledge:'<path d="M3 16c2-2 4-2 6 0s4 2 6 0 4-2 6 0M3 20c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><circle cx="12" cy="7" r="3"/><path d="M12 2v1M17 7h1M6 7h1M15.500 3.500l-.7.7M8.500 3.500l.7.7"/>',
+ world:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>',
+ path:'<path d="M3 20h5v-4h5v-4h5V8h3"/><path d="M18 5l3 3-3 3"/>',
+ library:'<path d="M5 4v16M9 4v16M5 4h4M5 20h4M13 5l4-1 3 15-4 1z"/>'
+};
+const CH_EN=[
+ ["home","Home",""],
+ ["history","History","From the Stone Age to 2026"],
+ ["language","Language","Script, grammar, the five landscapes"],
+ ["literature","Literature","Outline, verses, catalogue"],
+ ["culture","Culture","Values, family, food, dress"],
+ ["faith","Faith","From folk deities to rationalism"],
+ ["arts","Arts","Music, dance, sculpture, cinema"],
+ ["games","Games","Silambam, jallikattu, pallanguzhi, chess"],
+ ["festivals","Festivals","Pongal and the festival year"],
+ ["knowledge","Knowledge","Water, metal, sea, medicine"],
+ ["world","Tamil world","Tamil Nadu, Eelam, the diaspora"],
+ ["path","Learning path","A curriculum by age"],
+ ["library","Libraries","Where to find full texts"]
+];
+const CATS_EN={all:"All",sangam:"Sangam literature",keezh:"Eighteen Minor Works",kappiyam:"Epics and puranas",bhakti:"Bhakti literature",siddhar:"Siddhars, philosophy",needhi:"Ethical works",ilakkanam:"Grammar, commentary, lexicons",sitru:"Minor genres",c19:"Renaissance period",kavithai:"Modern poetry",punaivu:"Novels and short stories",katturai:"Prose and scholarship",ulagam:"Eelam, Malaysia, Singapore",naattar:"Folk literature",siruvar:"Children's literature"};
+const CH=EN?CH_EN:[
+ ["home","முகப்பு",""],
+ ["history","வரலாறு","கல்லாயுதக் காலம் முதல் 2026 வரை"],
+ ["language","மொழி","எழுத்து, இலக்கணம், ஐந்திணை"],
+ ["literature","இலக்கியம்","காலவரிசை, பாடல்கள், நூற்பட்டியல்"],
+ ["culture","பண்பாடு","விழுமியம், குடும்பம், உணவு, உடை"],
+ ["faith","சமயம்","நாட்டார் தெய்வம் முதல் பகுத்தறிவு வரை"],
+ ["arts","கலைகள்","இசை, கூத்து, சிற்பம், திரைப்படம்"],
+ ["games","விளையாட்டு","சிலம்பம், ஏறு தழுவுதல், பல்லாங்குழி, சதுரங்கம்"],
+ ["festivals","விழாக்கள்","பொங்கல், ஆண்டு நாள்காட்டி"],
+ ["knowledge","அறிவும் தொழிலும்","நீர், உலோகம், கடல், மருத்துவம்"],
+ ["world","தமிழர் உலகம்","தமிழ்நாடு, ஈழம், புலம்பெயர் நாடுகள்"],
+ ["path","கற்றல் பாதை","வயது வாரியான பாடத்திட்டம்"],
+ ["library","நூலகங்கள்","முழு நூல்கள் கிடைக்கும் இடங்கள்"]
+];
+const $=id=>document.getElementById(id);
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const lines=id=>$(id).textContent.split("\n").map(s=>s.trim()).filter(Boolean);
+const COL={history:"#8a1838",language:"#0f6b7a",literature:"#5b3a9e",culture:"#b3541e",faith:"#8f6400",arts:"#b0246a",games:"#2e7d32",festivals:"#c23b22",knowledge:"#1d5fa8",world:"#00796b",path:"#4a5d23",library:"#5d4037"};
+const ic=k=>`<span class="ic"><svg viewBox="0 0 24 24" aria-hidden="true">${I[k]}</svg></span>`;
+const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+const go=(el)=>el.scrollIntoView({behavior:reduce?"auto":"smooth",block:"start"});
+
+/* text size */
+let sc=1;try{sc=parseFloat(localStorage.getItem("tk-scale"))||1}catch(e){}
+const setSc=v=>{sc=Math.min(1.35,Math.max(.85,v));document.documentElement.style.setProperty("--scale",sc);try{localStorage.setItem("tk-scale",sc)}catch(e){}measure();};
+$("szm").onclick=()=>setSc(sc-.1);$("szp").onclick=()=>setSc(sc+.1);
+function measure(){document.documentElement.style.setProperty("--hh",$("top").offsetHeight+"px");}
+
+/* navigation, chapter heads, contents */
+$("rail").innerHTML=CH.map(c=>`<a href="#${c[0]}" data-v="${c[0]}" style="--accb:${COL[c[0]]||"#8a1838"}">${c[1]}</a>`).join("");
+$("tiles").innerHTML=CH.slice(1).map((c,i)=>`<a class="tile" href="#${c[0]}" style="--accb:${COL[c[0]]}"><span class="no">${i+1}</span>${ic(c[0])}<b>${c[1]}</b><span>${c[2]}</span></a>`).join("");
+const VIEWCB={};if(window.TKDYN)try{window.TKDYN({$,esc,go,reduce,en:EN,onView:(k,f)=>{VIEWCB[k]=f;}});}catch(e){console.error(e);}
+const SECT=[];
+CH.forEach((c,i)=>{
+  if(!i)return;const v=$("v-"+c[0]);
+  const h=document.createElement("div");h.className="chead";h.innerHTML=ic(c[0])+`<span>${EN?"Chapter":"இயல்"} ${i} / ${CH.length-1}</span>`;
+  v.style.setProperty("--accb",COL[c[0]]);
+  const hero=document.createElement("div");hero.className="chero";hero.innerHTML=`<svg class="wm" viewBox="0 0 24 24" aria-hidden="true">${I[c[0]]}</svg>`;
+  const h1=v.querySelector("h1"),ld=v.querySelector(".lead");v.insertBefore(hero,v.firstChild);hero.appendChild(h);hero.appendChild(h1);hero.appendChild(ld);
+  const hs=[...v.querySelectorAll("h2")];
+  if(hs.length>1){const t=document.createElement("div");t.className="toc";t.innerHTML="<span>"+(EN?"In this chapter":"இந்த இயலில்")+"</span>";
+    hs.forEach(x=>{const b=document.createElement("button");b.type="button";b.textContent=x.textContent;b.onclick=()=>go(x);t.appendChild(b);});
+    hero.after(t);}
+  hs.forEach(x=>{let tx="",e=x.nextElementSibling;while(e&&e.tagName!=="H2"){tx+=" "+e.textContent;e=e.nextElementSibling;}
+    SECT.push({v:c[0],ch:c[1],h:x,t:x.textContent,x:tx.replace(/\s+/g," ")});});
+  const p=CH[i-1],n=CH[i+1];const d=document.createElement("div");d.className="next";
+  d.innerHTML=`<a href="#${p[0]}"><small>← ${EN?"Previous":"முந்தையது"}</small>${p[1]}</a>`+(n?`<a href="#${n[0]}"><small>${EN?"Next":"அடுத்தது"} →</small>${n[1]}</a>`:`<a href="#home"><small>${EN?"The end":"முடிந்தது"}</small>${EN?"Home":"முகப்பு"}</a>`);
+  v.appendChild(d);
+});
+let pending=null;
+function route(){
+  let h=location.hash.slice(1);if(!CH.some(c=>c[0]===h))h="home";
+  CH.forEach(c=>$("v-"+c[0]).classList.toggle("on",c[0]===h));
+  document.querySelectorAll("#rail a").forEach(a=>{
+    if(a.dataset.v===h){a.setAttribute("aria-current","page");a.scrollIntoView({block:"nearest",inline:"center"});}
+    else a.removeAttribute("aria-current");});
+  document.documentElement.style.setProperty("--cur",COL[h]||"#c48a00");
+  measure();if(h==="home"&&window.__kolam)window.__kolam();if(VIEWCB[h])VIEWCB[h]();
+  if(pending){const t=pending;pending=null;setTimeout(()=>t.scrollIntoView({block:"start"}),30);}else window.scrollTo(0,0);
+  progress();
+}
+addEventListener("hashchange",route,{signal:SIG});
+function progress(){const d=document.documentElement,m=d.scrollHeight-innerHeight;
+  $("bar").style.width=(m>0?Math.min(100,scrollY/m*100):0)+"%";$("up").classList.toggle("on",scrollY>700);}
+addEventListener("scroll",progress,{passive:true,signal:SIG});addEventListener("resize",measure,{signal:SIG});
+$("up").onclick=()=>window.scrollTo({top:0,behavior:reduce?"auto":"smooth"});
+
+/* citations */
+const SRC={};lines("srcdata").forEach(l=>{const p=l.split("|");SRC[p[0]]={t:p[1],u:p[2]||""};});
+let n=0;const NUM={};
+document.querySelectorAll(".view").forEach(v=>{
+  const used=[];
+  v.querySelectorAll("sup[data-s]").forEach(s=>{
+    const k=s.dataset.s;if(!SRC[k]){s.remove();return;}
+    if(!NUM[k])NUM[k]=++n;if(!used.includes(k))used.push(k);
+    s.innerHTML=`<a href="#" data-ref="${v.id}" title="${esc(SRC[k].t)}">[${NUM[k]}]</a>`;
+  });
+  if(!used.length)return;
+  const box=document.createElement("div");box.id="src-"+v.id;
+  box.innerHTML="<h2>"+(EN?"Sources":"மூலங்கள்")+"</h2><ul class='srcs'>"+used.sort((a,b)=>NUM[a]-NUM[b]).map(k=>
+    `<li><span>[${NUM[k]}]</span><span>${esc(SRC[k].t)}${SRC[k].u?` <a href="${SRC[k].u}" target="_blank" rel="noopener">${EN?"link":"இணைப்பு"}</a>`:""}</span></li>`).join("")+"</ul>";
+  v.insertBefore(box,v.querySelector(".next"));
+});
+document.addEventListener("click",e=>{const a=e.target.closest("a[data-ref]");if(!a)return;e.preventDefault();
+  const b=$("src-"+a.dataset.ref);if(b)go(b);},{signal:SIG});
+
+/* literature catalogue */
+const CATS=EN?CATS_EN:{all:"அனைத்தும்",sangam:"சங்க இலக்கியம்",keezh:"பதினெண்கீழ்க்கணக்கு",kappiyam:"காப்பியம், புராணம்",bhakti:"பக்தி இலக்கியம்",siddhar:"சித்தர், மெய்யியல்",needhi:"நீதி நூல்கள்",ilakkanam:"இலக்கணம், உரை, அகராதி",sitru:"சிற்றிலக்கியம்",c19:"மறுமலர்ச்சிக் காலம்",kavithai:"நவீன கவிதை",punaivu:"நாவல், சிறுகதை",katturai:"உரைநடை, ஆய்வு",ulagam:"ஈழம், மலேசியா, சிங்கப்பூர்",naattar:"நாட்டார் இலக்கியம்",siruvar:"சிறுவர் இலக்கியம்"};
+const TAK=EN?document.getElementById("tpl-ta").content.getElementById("litdata").textContent.split("\n").map(x=>x.trim()).filter(Boolean).map(l=>l.split("|")[1]):null;
+const W=lines("litdata").map((l,i)=>{const p=l.split("|");return{c:p[0],t:p[1],a:p[2],d:p[3],n:p[4],f:p[5]==="1",k:TAK?TAK[i]:""};});
+let cat="all";
+const qi=$("q"),fw=document.createElement("div");fw.className="find";fw.style.margin="0";
+fw.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>';qi.before(fw);fw.appendChild(qi);
+$("cats").innerHTML=Object.keys(CATS).map(k=>`<button type="button" data-c="${k}" aria-pressed="${k==="all"}">${CATS[k]}<small>${k==="all"?W.length:W.filter(w=>w.c===k).length}</small></button>`).join("");
+const S=q=>"https://ta.wikisource.org/w/index.php?search="+encodeURIComponent(q);
+const P=q=>"https://"+(EN?"en":"ta")+".wikipedia.org/w/index.php?search="+encodeURIComponent(q);
+function draw(){
+  const q=qi.value.trim().toLowerCase();
+  const r=W.filter(w=>(cat==="all"||w.c===cat)&&(!q||(w.t+" "+w.k+" "+w.a+" "+w.n+" "+w.d).toLowerCase().includes(q)));
+  $("count").textContent=r.length+(EN?" entries":" பதிவுகள்");
+  $("works").innerHTML=r.map(w=>{const key=(w.k||w.t).split(/[,:(]/)[0].trim(),who=w.f?w.t.split(/[,:(]/)[0].trim():w.a.split(/[,(]/)[0].trim();
+    return `<div class="work"><b>${esc(w.t)}</b>${w.f?'<span class="pill">'+(EN?"Full text free":"முழுப்பாடம் இலவசம்")+'</span>':""}
+    ${w.k?`<div class="by" lang="ta">${esc(w.k)}</div>`:""}<div class="by">${esc(w.a)} · ${esc(w.d)}</div><p>${esc(w.n)}</p>
+    <div class="lk">${w.f?`<a class="read" href="${S(key)}" target="_blank" rel="noopener">${EN?"Read on Tamil Wikisource":"விக்கிமூலத்தில் படிக்க"}</a>`:""}<a href="${P(who)}" target="_blank" rel="noopener">${EN?"Look up on Wikipedia":"விக்கிப்பீடியாவில் அறிய"}</a></div></div>`;}).join("")||(EN?"<p>No matching work. Try another word, or choose 'All'.</p>":"<p>பொருந்தும் நூல் இல்லை. வேறு சொல்லால் தேடுங்கள் அல்லது 'அனைத்தும்' என்பதைத் தேர்ந்தெடுங்கள்.</p>");
+}
+qi.addEventListener("input",draw);
+$("cats").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;cat=b.dataset.c;
+  document.querySelectorAll("#cats button").forEach(x=>x.setAttribute("aria-pressed",x===b));draw();});
+draw();
+
+/* libraries */
+$("libs").innerHTML=lines("libdata").map(l=>{const p=l.split("|");
+  return `<div class="work"><b>${esc(p[0])}</b><p>${esc(p[2])}</p><div class="lk"><a class="read" href="${p[1]}" target="_blank" rel="noopener">${EN?"Open the site":"தளத்தைத் திற"}</a></div></div>`;}).join("");
+
+/* site-wide search */
+const gq=$("gq"),gres=$("gres");let HITS=[];
+gq.addEventListener("input",()=>{
+  const q=gq.value.trim().toLowerCase();HITS=[];
+  if(q.length<2){gres.innerHTML="";return;}
+  SECT.forEach((s,i)=>{const hay=(s.t+" "+s.x).toLowerCase(),k=hay.indexOf(q);if(k<0)return;
+    const full=s.t+" "+s.x;HITS.push({k:"s",i,w:s.t.toLowerCase().includes(q)?0:1,a:s.ch+" › "+s.t,b:"…"+full.slice(Math.max(0,k-30),k+70)+"…"});});
+  W.forEach(w=>{if((w.t+" "+w.k+" "+w.a).toLowerCase().includes(q))HITS.push({k:"w",q:w.t,w:1,a:(EN?"Book: ":"நூல்: ")+w.t,b:w.a+" · "+w.n});});
+  HITS.sort((a,b)=>a.w-b.w);HITS=HITS.slice(0,12);
+  gres.innerHTML=HITS.length?HITS.map((h,j)=>`<a href="#" data-hit="${j}"><em>${esc(h.a)}</em><small>${esc(h.b)}</small></a>`).join("")
+    :"<a href='#literature'><small>"+(EN?"Nothing found here. Try the catalogue or the Libraries chapter.":"களஞ்சியத்தில் கிடைக்கவில்லை. நூற்பட்டியலில் அல்லது நூலகங்கள் இயலில் தேடிப் பாருங்கள்.")+"</small></a>";
+});
+gres.addEventListener("click",e=>{const a=e.target.closest("a[data-hit]");if(!a)return;e.preventDefault();const h=HITS[a.dataset.hit];
+  if(h.k==="s"){const s=SECT[h.i];pending=s.h;if(location.hash==="#"+s.v)route();else location.hash=s.v;}
+  else{qi.value=h.q;cat="all";document.querySelectorAll("#cats button").forEach(x=>x.setAttribute("aria-pressed",x.dataset.c==="all"));draw();
+    pending=$("works");location.hash="literature";}});
+
+/* kolam: rice-flour loops around a diamond of dots, drawn once on load */
+(function(){
+  const c=$("kolam"),g=c.getContext("2d");const R=[1,3,5,7,5,3,1],dots=[],set=new Set();
+  R.forEach((w,y)=>{for(let k=0;k<w;k++){const x=3-(w-1)/2+k;dots.push([x,y]);set.add(x+","+y);}});
+  dots.sort((a,b)=>(Math.abs(a[0]-3)+Math.abs(a[1]-3))-(Math.abs(b[0]-3)+Math.abs(b[1]-3)));
+  let s,o,t0=null;
+  function size(){const d=devicePixelRatio||1,w=c.clientWidth||240;c.width=c.height=w*d;g.setTransform(d,0,0,d,0,0);s=w/8.2;o=(w-6*s)/2;}
+  function loop(x,y){const X=o+x*s,Y=o+y*s,h=s/2,q=s/4,r=s*.21;
+    const V=[[X,Y-h,set.has(x+","+(y-1))],[X+h,Y,set.has((x+1)+","+y)],[X,Y+h,set.has(x+","+(y+1))],[X-h,Y,set.has((x-1)+","+y)]];
+    const M=[[X+q,Y-q],[X+q,Y+q],[X-q,Y+q],[X-q,Y-q]];
+    g.beginPath();g.moveTo(X-q,Y-q);
+    V.forEach((v,i)=>{if(v[2]){g.lineTo(v[0],v[1]);g.lineTo(M[i][0],M[i][1]);}else g.arcTo(v[0],v[1],M[i][0],M[i][1],r);});
+    g.closePath();}
+  function frame(ts){
+    if(t0===null)t0=ts;const T=reduce?1:Math.min(1,(ts-t0)/2600),w=c.clientWidth;
+    g.clearRect(0,0,w,w);g.lineCap="round";g.lineJoin="round";
+    g.strokeStyle="#fbf6ee";g.lineWidth=Math.max(1.6,s*.075);g.shadowColor="rgba(251,246,238,.35)";g.shadowBlur=4;
+    const per=4*s*.72,f=T*dots.length;
+    dots.forEach((d,i)=>{const p=Math.max(0,Math.min(1,f-i));if(p<=0)return;loop(d[0],d[1]);g.setLineDash(p<1?[per*p,per*2]:[]);g.stroke();});
+    g.setLineDash([]);g.shadowBlur=0;g.fillStyle="#e7b23c";
+    dots.forEach(d=>{g.beginPath();g.arc(o+d[0]*s,o+d[1]*s,Math.max(1.6,s*.06),0,7);g.fill();});
+    if(T<1)requestAnimationFrame(frame);
+  }
+  function start(){size();t0=reduce?0:null;requestAnimationFrame(frame);}
+  addEventListener("resize",()=>{size();t0=-1e6;requestAnimationFrame(frame);},{signal:SIG});
+  window.__kolam=()=>{if(Math.abs(c.width/(devicePixelRatio||1)-c.clientWidth)>1){size();t0=reduce?0:null;requestAnimationFrame(frame);}};
+  start();
+})();
+
+setSc(sc);route();
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(measure);
+}
+(function(){
+  const LS=(k,v)=>{try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v);}catch(e){return null;}};
+  const g=id=>document.getElementById(id),root=document.documentElement;
+  let lang=LS("tk-lang")==="en"?"en":"ta";
+  function setLang(l){lang=l;LS("tk-lang",l);g("lng").textContent=l==="en"?"தமிழ்":"English";g("lng").setAttribute("aria-label",l==="en"?"தமிழுக்கு மாற்று":"Switch to English");boot(l);}
+  g("lng").onclick=()=>setLang(lang==="en"?"ta":"en");
+  document.addEventListener("click",e=>{const b=e.target.closest("[data-setlang]");if(b)setLang(b.dataset.setlang);});
+  const F=[["notosans","Noto Sans Tamil"],["notoserif","Noto Serif Tamil"],["tiro","Tiro Tamil"],["mukta","Mukta Malar"],["catamaran","Catamaran"],["baloo","Baloo Thambi 2"],["kavi","Kavivanar"]];
+  let font=LS("tk-font2")||"notosans";
+  function setFont(k,save){const f=F.find(x=>x[0]===k)||F[0];font=f[0];if(save)LS("tk-font2",font);
+    if(font==="notosans"){root.style.removeProperty("--body");root.style.removeProperty("--display");}
+    else{const v='"'+f[1]+'","Noto Sans Tamil","Latha",sans-serif';root.style.setProperty("--body",v);root.style.setProperty("--display",v);}
+    g("fonts").querySelectorAll("button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.f===font));
+    setTimeout(()=>dispatchEvent(new Event("resize")),300);}
+  g("fonts").innerHTML=F.map(f=>`<button type="button" data-f="${f[0]}" style="font-family:'${f[1]}','Noto Sans Tamil',sans-serif"><span>தமிழ் அழகு</span><small>${f[1]}</small></button>`).join("");
+  g("fonts").onclick=e=>{const b=e.target.closest("button");if(b)setFont(b.dataset.f,true);};
+  g("set").onclick=()=>{const p=g("setp"),o=p.hidden;p.hidden=!o;g("set").setAttribute("aria-expanded",o);};
+  document.addEventListener("click",e=>{if(!g("setp").hidden&&!e.target.closest("#setp,#set")){g("setp").hidden=true;g("set").setAttribute("aria-expanded","false");}});
+  setLang(lang);setFont(font);
+})();
+</script>
+</body>
+</html>

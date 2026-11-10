@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>தமிழ்க் களஞ்சியம்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Anek+Tamil:wght@400;600&family=Arima:wght@500;700&family=Baloo+Thambi+2:wght@400;700&family=Catamaran:wght@400;700&family=Kavivanar&family=Mukta+Malar:wght@400;700&family=Noto+Sans+Tamil:wght@400;700&family=Noto+Serif+Tamil:wght@400;700&family=Tiro+Tamil:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Layout idea: the site is a threshold. A rice-flour kolam drawn on dark wet ground opens it (the one bold moment);
+     everything after is a quiet reading book whose headings carry a silk-border stripe of arakku and turmeric. */
+  --paper:#f5f2f6; --surface:#ffffff; --ink:#1f1a2c; --muted:#625b74;
+  --arakku:#8a1838; --manjal:#c48a00; --line:#dfd9e4; --tint:#f4e8ec;
+  --ground:#27131a; --rice:#fbf6ee; --scale:1; --hh:96px;
+  --display:"Noto Sans Tamil","Anek Tamil","Latha",sans-serif;
+  --body:"Noto Sans Tamil","Latha","Tamil Sangam MN","Nirmala UI",sans-serif;
+  --ui:"Anek Tamil","Noto Sans Tamil","Latha","Tamil Sangam MN",sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){color-scheme:dark;
+    --paper:#15121f; --surface:#1f1b2e; --ink:#ece7f3; --muted:#aaa3bd;
+    --arakku:#f28ca6; --manjal:#e8b43f; --line:#363049; --tint:#2b2136;}
+}
+:root[data-theme="dark"]{color-scheme:dark;
+  --paper:#15121f; --surface:#1f1b2e; --ink:#ece7f3; --muted:#aaa3bd;
+  --arakku:#f28ca6; --manjal:#e8b43f; --line:#363049; --tint:#2b2136;}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:calc(17.5px*var(--scale));line-height:1.9}
+a{color:var(--arakku);text-underline-offset:3px;text-decoration-thickness:1px}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--manjal);outline-offset:2px}
+button{font-family:var(--ui)}
+
+/* header */
+header.top{position:sticky;top:0;z-index:6;background:var(--surface);box-shadow:0 1px 0 var(--line)}
+.stripe{height:5px;background:repeating-linear-gradient(90deg,var(--arakku) 0 20px,var(--manjal) 20px 26px)}
+.brand{display:flex;align-items:center;gap:10px;padding:8px 16px 0;max-width:900px;margin:0 auto}
+.brand a.home{font-family:var(--display);font-weight:700;font-size:1.25rem;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:8px;margin-right:auto}
+.brand svg{width:22px;height:22px;stroke:var(--arakku);fill:none;stroke-width:1.6}
+.sz{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.sz button{border:0;background:none;color:var(--ink);padding:2px 11px;font-size:.85rem;cursor:pointer;min-height:30px}
+.sz button+button{border-left:1px solid var(--line);font-size:1.05rem}
+html[lang="en"] [data-l="ta"],html[lang="ta"] [data-l="en"]{display:none}
+.tr{display:block;font-family:var(--ui);font-style:italic;color:var(--muted);font-size:.9em;line-height:1.6;margin-top:6px}
+.hb{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:3px 12px;font-size:.84rem;cursor:pointer;min-height:32px;white-space:nowrap}
+#lng{border-color:var(--arakku);color:var(--arakku);font-weight:600}
+#setp{position:absolute;right:10px;top:calc(100% + 6px);width:min(320px,calc(100vw - 20px));background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:0 10px 30px rgba(0,0,0,.2);font-family:var(--ui);z-index:8}
+#setp h4{margin:0 0 6px;font-family:var(--ui);font-size:.8rem;font-weight:600;color:var(--muted)}
+#fonts{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+#fonts button{border:1.5px solid var(--line);background:var(--paper);color:var(--ink);border-radius:10px;padding:6px 8px;cursor:pointer;text-align:left}
+#fonts button span{display:block;font-size:1.05rem;line-height:1.5}
+#fonts button small{display:block;font-family:var(--ui);font-size:.68rem;color:var(--muted)}
+#fonts button[aria-pressed="true"]{border-color:var(--arakku);background:var(--tint)}
+.railwrap{position:relative;max-width:900px;margin:0 auto}
+.railwrap::after{content:"";position:absolute;right:0;top:0;bottom:0;width:34px;background:linear-gradient(90deg,transparent,var(--surface));pointer-events:none}
+nav.rail{display:flex;gap:4px;overflow-x:auto;padding:6px 30px 0 12px;scrollbar-width:none}
+nav.rail::-webkit-scrollbar{display:none}
+nav.rail a{flex:none;padding:5px 10px 7px;text-decoration:none;color:var(--muted);font-family:var(--ui);font-size:.92rem;border-bottom:3px solid transparent}
+nav.rail a[aria-current="page"]{color:var(--arakku);border-color:var(--arakku);font-weight:600}
+#bar{height:3px;background:var(--manjal);width:0;transition:width .1s linear}
+
+main{max-width:740px;margin:0 auto;padding:22px 16px 60px}
+.view{display:none}.view.on{display:block;animation:rise .35s ease both}
+@keyframes rise{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
+h1,h2,h3{font-family:var(--display);line-height:1.3;text-wrap:balance;margin:0}
+h1{font-size:2.2rem;font-weight:700;letter-spacing:-.01em}
+h2{font-size:1.4rem;font-weight:700;margin:42px 0 10px;scroll-margin-top:calc(var(--hh) + 14px)}
+h2::before{content:"";display:block;width:64px;height:5px;margin-bottom:12px;background:repeating-linear-gradient(90deg,var(--arakku) 0 20px,var(--manjal) 20px 26px)}
+h3{font-family:var(--ui);font-size:1.02rem;font-weight:600;color:var(--arakku);margin:22px 0 4px}
+p{margin:10px 0}
+.lead{font-size:1.08rem;color:var(--muted);font-style:italic;margin-top:8px}
+ul{padding-left:20px;margin:8px 0}li{margin:6px 0}li::marker{color:var(--manjal)}
+b{font-family:var(--ui);font-weight:600}
+
+/* chapter head */
+.chead{display:flex;align-items:center;gap:12px;margin-bottom:10px;font-family:var(--ui);color:var(--muted);font-size:.85rem}
+.chead .ic{width:46px;height:46px;border-radius:50%;background:var(--tint);display:grid;place-items:center;flex:none}
+.ic svg{width:26px;height:26px;stroke:var(--arakku);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.toc{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0 4px;padding:12px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+.toc span{width:100%;font-family:var(--ui);font-size:.78rem;color:var(--muted);letter-spacing:.04em}
+.toc button{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:3px 12px;font-size:.84rem;cursor:pointer;text-align:left}
+.toc button:hover{border-color:var(--arakku);color:var(--arakku)}
+
+/* content blocks */
+.verse{position:relative;font-size:1rem;line-height:1.8;background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--manjal);padding:14px 12px 12px 38px;margin:14px 0;border-radius:4px 12px 12px 4px}
+.verse::before{content:"\201C";position:absolute;left:10px;top:-2px;font-family:var(--display);font-size:3rem;color:var(--manjal);line-height:1.2}
+.verse cite{display:block;font-family:var(--ui);font-style:normal;color:var(--muted);font-size:.8rem;margin-top:6px}
+.note{font-family:var(--ui);background:var(--tint);border-radius:10px;padding:12px 16px;color:var(--ink);font-size:.9rem;line-height:1.7;margin:16px 0}
+.tl{list-style:none;padding:0 0 0 14px;margin:14px 0;border-left:2px solid var(--line)}
+.tl li{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:0 0 10px 8px}
+.tl li::before{content:"";position:absolute;left:-30px;top:16px;width:12px;height:12px;border-radius:50%;background:var(--paper);border:3px solid var(--manjal)}
+.tl li>b:first-child{display:inline-block;font-family:var(--display);font-weight:700;color:var(--arakku);font-variant-numeric:tabular-nums;margin-bottom:2px}
+.tw{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:collapse;width:100%;font-size:.92rem;background:var(--surface);line-height:1.65}
+th,td{border-bottom:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+tr:last-child td{border-bottom:0}
+tr:nth-child(odd) td{background:color-mix(in srgb,var(--tint) 35%,transparent)}
+th{font-family:var(--ui);font-weight:600;background:var(--tint);white-space:nowrap}
+sup a{font-family:var(--ui);font-size:.72rem;text-decoration:none;padding:0 2px}
+.srcs{font-family:var(--ui);font-size:.86rem;line-height:1.6;list-style:none;padding:0}
+.srcs li{display:flex;gap:8px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.srcs li span:first-child{color:var(--arakku);font-weight:600;flex:none;min-width:2.2em}
+
+/* home */
+.hero{background:var(--ground);color:var(--rice);border-radius:18px;padding:22px 20px 24px;display:grid;gap:8px;grid-template-columns:1fr;overflow:hidden}
+.hero canvas{width:min(250px,72%);aspect-ratio:1;justify-self:center}
+.hero .eyebrow{font-family:var(--ui);font-size:.85rem;letter-spacing:.08em;color:#e7b23c;margin:0}
+.hero h1{font-size:2.7rem;color:var(--rice)}
+.hero p.sub{margin:6px 0 0;color:#e6dbd2;font-size:1rem;line-height:1.75;max-width:34em}
+@media (min-width:680px){.hero{grid-template-columns:1.2fr 1fr;align-items:center;padding:34px}.hero canvas{order:2;width:100%}.hero h1{font-size:3.4rem}}
+.find{position:relative;margin:18px 0 6px}
+.find svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:20px;height:20px;stroke:var(--muted);fill:none;stroke-width:1.8}
+#gq,#q{width:100%;padding:13px 14px 13px 44px;font:inherit;font-family:var(--ui);font-size:1rem;border:1.5px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink)}
+#gq:focus,#q:focus{border-color:var(--arakku);outline:none;box-shadow:0 0 0 3px var(--tint)}
+#gres{display:grid;gap:6px;margin:8px 0}
+#gres a{display:block;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 14px;text-decoration:none;color:var(--ink);font-family:var(--ui);font-size:.9rem;line-height:1.5}
+#gres a small{display:block;color:var(--muted)}#gres a em{font-style:normal;color:var(--arakku);font-size:.78rem}
+.paths{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin:12px 0}
+.paths a{display:flex;gap:12px;align-items:center;background:var(--arakku);color:var(--surface);border-radius:12px;padding:12px 16px;text-decoration:none;font-family:var(--ui);line-height:1.4}
+.paths a b{display:block;font-size:1.02rem}.paths a span{font-size:.82rem;opacity:.9}
+.paths a i{font-style:normal;font-size:1.3rem;margin-left:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(158px,1fr));gap:10px;margin:14px 0}
+.tile{position:relative;display:block;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 14px 12px;text-decoration:none;color:var(--ink);transition:transform .15s,border-color .15s}
+.tile:hover{transform:translateY(-2px);border-color:var(--arakku)}
+.tile .ic{width:40px;height:40px;border-radius:50%;background:var(--tint);display:grid;place-items:center;margin-bottom:8px}
+.tile .ic svg{width:23px;height:23px}
+.tile .no{position:absolute;right:12px;top:8px;font-family:var(--display);font-size:1.5rem;font-weight:700;color:var(--line)}
+.tile b{font-family:var(--display);font-weight:700;font-size:1.12rem;display:block}
+.tile span{font-family:var(--ui);color:var(--muted);font-size:.8rem;line-height:1.45;display:block}
+
+/* catalogue */
+.tools{position:sticky;top:var(--hh);background:var(--paper);padding:8px 0 4px;z-index:2}
+.chips{display:flex;gap:6px;overflow-x:auto;padding:8px 0 4px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips button{flex:none;font-size:.82rem;padding:4px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);cursor:pointer}
+.chips button small{color:var(--muted);margin-left:4px}
+.chips button[aria-pressed="true"]{background:var(--arakku);color:var(--surface);border-color:var(--arakku)}
+.chips button[aria-pressed="true"] small{color:inherit;opacity:.8}
+#count{font-family:var(--ui);color:var(--muted);font-size:.82rem;margin:6px 0}
+.work{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:11px 15px;margin:9px 0;font-family:var(--ui)}
+.work b{font-family:var(--display);font-weight:700;font-size:1.1rem}
+.work .by{color:var(--muted);font-size:.82rem}
+.work p{margin:4px 0;font-size:.92rem;line-height:1.65}
+.work .lk{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.work .lk a{font-size:.82rem;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:2px 12px}
+.work .lk a.read{background:var(--arakku);border-color:var(--arakku);color:var(--surface)}
+.pill{font-family:var(--ui);font-size:.7rem;font-weight:400;background:var(--tint);color:var(--arakku);border-radius:999px;padding:1px 8px;margin-left:8px;white-space:nowrap;vertical-align:middle}
+
+.next{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:40px}
+.next a{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;text-decoration:none;font-family:var(--display);font-weight:700;color:var(--ink);line-height:1.4}
+.next a small{display:block;font-family:var(--ui);font-weight:400;color:var(--muted);font-size:.76rem}
+.next a:last-child{text-align:right;border-color:var(--arakku)}
+#up{position:fixed;right:14px;bottom:16px;width:44px;height:44px;border-radius:50%;border:0;background:var(--arakku);color:var(--surface);font-size:1.2rem;cursor:pointer;box-shadow:0 3px 10px rgba(0,0,0,.25);display:none;z-index:5}
+#up.on{display:block}
+footer{max-width:740px;margin:0 auto;padding:0 16px 80px}
+/* breathing room */
+main{padding:36px 22px 96px;max-width:720px}
+.brand{padding:12px 22px 2px}nav.rail{padding:8px 34px 0 16px;gap:8px}
+h1{margin-bottom:14px}
+h2{margin:72px 0 20px}h2::before{margin-bottom:18px}
+h3{margin:36px 0 10px}
+p{margin:18px 0}.lead{margin:14px 0 28px;line-height:1.95}
+ul{margin:16px 0}li{margin:12px 0}
+.chead{margin-bottom:20px}
+.toc{margin:28px 0 8px;padding:18px;gap:10px}
+.verse{margin:26px 0;padding:20px 18px 18px 46px}.verse::before{left:14px;top:4px}
+.note{margin:30px 0;padding:18px 22px}
+.tl{margin:24px 0}.tl li{padding:16px 20px;margin:0 0 18px 8px}.tl li::before{top:22px}
+.tw{margin:26px 0}th,td{padding:13px 15px}
+.hero{padding:34px 26px 38px;gap:18px}
+.find{margin:30px 0 10px}
+.paths{gap:14px;margin:20px 0}.paths a{padding:18px 20px}
+.grid{gap:16px;margin:24px 0}.tile{padding:20px 18px 18px}.tile .ic{margin-bottom:14px}
+.panel{padding:22px;margin:30px 0}
+.work{padding:18px 20px;margin:16px 0}.work p{margin:8px 0}.work .lk{margin-top:14px}
+.media{gap:14px}.media div{padding:16px 18px}.media b{margin-bottom:10px}
+.tools{padding:12px 0 8px}.chips{padding:12px 0 6px}
+.srcs li{padding:12px 0}
+.next{margin-top:72px;gap:14px}.next a{padding:16px 18px}
+.opts{gap:12px;margin:16px 0}.opts button{padding:13px 16px}
+footer{padding:0 22px 110px}
+@media (min-width:680px){main{padding-top:52px}.hero{padding:48px}}
+/* colour: each chapter carries one silk colour (--accb is the deep base, --acc the readable tone for the current theme) */
+.view,.tile,nav.rail a{--acc:var(--accb,var(--arakku))}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) :is(.view,.tile,nav.rail a){--acc:color-mix(in srgb,var(--accb,#8a1838) 42%,#fff)}}
+:root[data-theme="dark"] :is(.view,.tile,nav.rail a){--acc:color-mix(in srgb,var(--accb,#8a1838) 42%,#fff)}
+.stripe{height:7px;background:repeating-linear-gradient(90deg,#8a1838 0 22px,#c48a00 22px 30px,#0f6b7a 30px 52px,#c48a00 52px 60px,#b0246a 60px 82px,#c48a00 82px 90px,#2e7d32 90px 112px,#c48a00 112px 120px)}
+#bar{background:var(--cur,var(--manjal));height:4px}
+nav.rail a[aria-current="page"]{color:var(--acc);border-color:var(--acc)}
+.view a{color:var(--acc)}
+h2::before{width:84px;height:6px;border-radius:3px;background:linear-gradient(90deg,var(--acc) 0 62%,var(--manjal) 62% 100%)}
+#v-home h2::before{background:linear-gradient(90deg,#8a1838 0 25%,#c48a00 25% 50%,#0f6b7a 50% 75%,#b0246a 75% 100%)}
+h3{color:var(--acc)}
+.chero{position:relative;overflow:hidden;border-radius:20px;padding:26px 24px 12px;margin-bottom:8px;background:linear-gradient(135deg,color-mix(in srgb,var(--acc) 16%,var(--surface)),var(--surface) 70%);border:1px solid color-mix(in srgb,var(--acc) 25%,var(--line))}
+.chero .wm{position:absolute;right:-18px;top:-14px;width:170px;height:170px;stroke:var(--acc);fill:none;stroke-width:.7;opacity:.16;color:var(--acc)}
+.chero>*{position:relative}.chero h1{color:var(--acc)}
+.chero .lead{color:var(--ink);opacity:.85;margin-bottom:16px}
+.ic{background:var(--accb,var(--arakku))!important}
+.ic svg{stroke:#fff!important;color:#fff}
+.chead span:last-child{font-weight:600;color:var(--acc);letter-spacing:.04em}
+.toc{border-color:color-mix(in srgb,var(--acc) 22%,var(--line))}
+.toc button:hover{border-color:var(--acc);color:var(--acc)}
+.tl{border-left:3px solid;border-image:linear-gradient(var(--acc),var(--manjal)) 1}
+.tl li{border-left:4px solid var(--acc)}
+.tl li::before{border-color:var(--acc)}
+.tl li>b:first-child{color:var(--acc)}
+.verse{border-left-color:var(--acc);background:linear-gradient(120deg,color-mix(in srgb,var(--manjal) 9%,var(--surface)),var(--surface))}
+.verse::before{color:var(--acc)}
+.view .note{background:color-mix(in srgb,var(--acc) 9%,var(--surface));border-left:4px solid var(--acc)}
+th{background:color-mix(in srgb,var(--acc) 14%,var(--surface));color:var(--ink)}
+tr:nth-child(odd) td{background:color-mix(in srgb,var(--acc) 4%,transparent)}
+.srcs li span:first-child,sup a{color:var(--acc)}
+.view .btn{background:var(--accb,var(--arakku));border-color:var(--accb,var(--arakku));color:#fff}
+.view .btn.ghost{background:none;color:var(--acc);border-color:var(--acc)}
+.hero .btn.ghost{color:#fbf6ee;border-color:#e7b23c}
+.chips button[aria-pressed="true"],.work .lk a.read{background:var(--accb);border-color:var(--accb);color:#fff}
+.work{border-left:4px solid color-mix(in srgb,var(--acc) 55%,var(--line))}
+.pill{background:color-mix(in srgb,var(--acc) 14%,var(--surface));color:var(--acc)}
+.panel{border-top:5px solid var(--acc)}
+.next a:last-child{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 8%,var(--surface))}
+.media div{border-top:4px solid color-mix(in srgb,var(--acc) 60%,var(--line))}
+/* home */
+.hero{background:radial-gradient(120% 90% at 85% 0%,#4a1730 0%,#27131a 55%);box-shadow:inset 0 -8px 0 #c48a00,inset 0 -14px 0 #8a1838}
+.tile{border:0;box-shadow:0 1px 0 var(--line),0 0 0 1px var(--line);overflow:hidden;padding-top:26px}
+.tile::before{content:"";position:absolute;left:0;right:0;top:0;height:8px;background:var(--accb)}
+.tile:hover{box-shadow:0 10px 24px color-mix(in srgb,var(--accb) 28%,transparent),0 0 0 1.5px var(--acc)}
+.tile .no{color:color-mix(in srgb,var(--acc) 30%,var(--surface));font-size:2rem;top:14px}
+.tile b{color:var(--acc)}
+.paths a:nth-child(1){background:linear-gradient(120deg,#8a1838,#b0246a)}
+.paths a:nth-child(2){background:linear-gradient(120deg,#5b3a9e,#1d5fa8)}
+.paths a:nth-child(3){background:linear-gradient(120deg,#2e7d32,#0f6b7a)}
+.paths a{color:#fff;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+#v-home .panel{border-top-color:var(--manjal)}
+#gq:focus,#q:focus{border-color:var(--acc,var(--arakku))}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.view.on{animation:none}.tile{transition:none}}
+</style>
+</head>
+<body>
+<header class="top" id="top">
+  <div class="stripe"></div>
+  <div class="brand">
+    <a class="home" href="#home"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 9-9 9-9-9z"/><circle cx="12" cy="12" r="1.6"/></svg><span data-l="ta">தமிழ்க் களஞ்சியம்</span><span data-l="en">Tamil Kalanjiyam</span></a>
+    <button type="button" class="hb" id="lng">English</button>
+    <button type="button" class="hb" id="set" aria-expanded="false" aria-controls="setp" aria-label="எழுத்துரு, எழுத்தளவு / Font and text size">அஆ</button>
+  </div>
+  <div id="setp" hidden>
+    <h4><span data-l="ta">எழுத்தளவு</span><span data-l="en">Text size</span></h4>
+    <div class="sz" role="group" style="width:max-content;margin-bottom:12px"><button type="button" id="szm" aria-label="smaller">அ−</button><button type="button" id="szp" aria-label="larger">அ+</button></div>
+    <h4><span data-l="ta">தமிழ் எழுத்துரு</span><span data-l="en">Tamil font</span></h4>
+    <div id="fonts"></div>
+  </div>
+  <div class="railwrap"><nav class="rail" id="rail" aria-label="இயல்கள்"></nav></div>
+  <div id="bar"></div>
+</header>
+<main>
+
+<section class="view" id="v-home">
+<div class="hero">
+  <canvas id="kolam" aria-hidden="true"></canvas>
+  <div>
+    <p class="eyebrow">வாசல் திறந்திருக்கிறது</p>
+    <h1>தமிழ்க் களஞ்சியம்</h1>
+    <p class="sub">தமிழரின் வரலாறு, மொழி, இலக்கியம், பண்பாடு, கலை, அறிவு. தொன்மை முதல் இன்று வரை ஒரே இடத்தில். தமிழ் படிக்கத் தெரிந்தால் போதும்; இங்கிருந்து தொடங்கலாம்.</p>
+    <p style="margin:12px 0 0"><button type="button" class="btn ghost" data-setlang="en" style="color:#fbf6ee;border-color:#e7b23c">Read in English</button></p>
+  </div>
+</div>
+
+<div class="find">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+  <input id="gq" type="search" placeholder="எதைப் பற்றி அறிய வேண்டும்? (எ.கா. பொங்கல், கீழடி, பாரதி)" aria-label="களஞ்சியம் முழுவதும் தேடு">
+</div>
+<div id="gres" aria-live="polite"></div>
+
+<h2>எங்கிருந்து தொடங்குவது</h2>
+<div class="paths">
+  <a href="#history"><div><b>முதல் முறை வருகிறேன்</b><span>வரலாற்றிலிருந்து வரிசையாகப் படிக்க</span></div><i>→</i></a>
+  <a href="#literature"><div><b>ஒரு நூலைத் தேடுகிறேன்</b><span>228 பதிவுகள் கொண்ட நூற்பட்டியல்</span></div><i>→</i></a>
+  <a href="#path"><div><b>கற்பிக்க விரும்புகிறேன்</b><span>வயது வாரியான பாடத்திட்டம்</span></div><i>→</i></a>
+</div>
+
+<h2>பன்னிரண்டு இயல்கள்</h2>
+<div class="grid" id="tiles"></div>
+
+<div class="verse">யாதும் ஊரே; யாவரும் கேளிர்;<br>தீதும் நன்றும் பிறர் தர வாரா<cite>கணியன் பூங்குன்றனார், புறநானூறு 192</cite></div>
+
+<div class="note"><b>குறிப்பு:</b> இது செயற்கை நுண்ணறிவால் (Claude) உருவாக்கப்பட்ட தொகுப்பு. ஒவ்வோர் இயலின் அடியிலும் மூலங்கள் எண்ணிட்டுத் தரப்பட்டுள்ளன; முக்கியத் தகவல்களை அவற்றோடு சரிபார்த்துக்கொள்ளுங்கள்.</div>
+<div class="note">ஒரு பக்கத்தில் ஒரு நாகரிகம் முழுவதையும் அடக்க முடியாது. இது முழுமையான நூலகம் அல்ல; நூலகங்களுக்கு அழைத்துச் செல்லும் வாயில். சங்க இலக்கியம் முதல் நாட்டுடைமையாக்கப்பட்ட நூல்கள் வரை லட்சக்கணக்கான பக்கங்கள் மதுரைத் திட்டம், தமிழ் இணையக் கல்விக்கழகம், விக்கிமூலம், நூலகம் (ஈழம்) போன்ற தளங்களில் இலவசமாகக் கிடைக்கின்றன; இணைப்புகள் நூலகங்கள் இயலில். ஆய்வாளர்களிடையே கருத்து வேறுபாடு உள்ள இடங்களில் அது குறிப்பிடப்பட்டுள்ளது.</div>
+</section>

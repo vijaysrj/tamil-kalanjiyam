@@ -1,0 +1,252 @@
+<style>
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;margin:14px 0;font-family:var(--ui)}
+.panel h3{margin-top:0}
+.btn{font-family:var(--ui);font-size:.9rem;border:1px solid var(--arakku);background:var(--arakku);color:var(--surface);border-radius:999px;padding:6px 16px;cursor:pointer}
+.btn.ghost{background:none;color:var(--arakku)}
+.btn:disabled{opacity:.5;cursor:default}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.kd{font-family:var(--body);font-size:1.15rem;line-height:1.8;margin:6px 0}
+.kd small{display:block;font-family:var(--ui);font-size:.8rem;color:var(--muted)}
+/* eras */
+.eras{overflow-x:auto;margin:14px 0}
+.eras .strip{display:flex;min-width:640px;gap:2px}
+.eras button{border:0;cursor:pointer;color:#fff;font-size:.74rem;line-height:1.3;padding:8px 4px;min-height:58px;border-radius:6px}
+.eras .ax{display:flex;min-width:640px;justify-content:space-between;font-family:var(--ui);font-size:.72rem;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:3px}
+/* tinai */
+.tinai{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.tinai button{border:2px solid transparent;border-radius:10px;padding:0;background:none;cursor:pointer;overflow:hidden;color:var(--ink);font-size:.76rem}
+.tinai button[aria-pressed="true"]{border-color:var(--arakku)}
+.tinai svg{display:block;width:100%;height:auto}
+.tinai span{display:block;padding:2px 0 4px}
+.tbig svg{width:100%;height:auto;border-radius:10px;display:block;margin:10px 0}
+dl.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:0;font-size:.9rem;line-height:1.6}
+dl.kv dt{color:var(--muted)}dl.kv dd{margin:0}
+/* leaf */
+.leaf svg{width:100%;height:auto;display:block}
+.leaf ol{columns:2;font-size:.86rem;line-height:1.7;padding-left:22px;margin:8px 0 0}
+/* kolam lab */
+.klab canvas{width:min(300px,100%);aspect-ratio:1;background:var(--ground);border-radius:14px;display:block;margin:10px auto}
+/* pallanguzhi */
+.pb{background:#6b3f22;border-radius:40px;padding:12px;display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:10px 0}
+.pb button{aspect-ratio:1;border-radius:50%;border:0;background:#3d2313;color:#f6e7c8;font-family:var(--ui);font-size:1rem;font-weight:600;cursor:pointer;box-shadow:inset 0 3px 6px rgba(0,0,0,.5);padding:0}
+.pb button.mine{outline:2px solid #e7b23c}
+.pb button.hot{background:#e7b23c;color:#27131a}
+.pb button:disabled{cursor:default}
+.score{display:flex;justify-content:space-between;font-size:.9rem}
+.score b.on{color:var(--arakku);text-decoration:underline}
+/* quiz, tutor, media, path */
+.opts{display:grid;gap:8px;margin:10px 0}
+.opts button{font-family:var(--ui);font-size:.95rem;text-align:left;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:10px;padding:9px 14px;cursor:pointer}
+.opts button.ok{border-color:#2e7d4f;background:#2e7d4f;color:#fff}
+.opts button.no{border-color:#b3261e;background:#b3261e;color:#fff}
+#tq{flex:1;min-width:0;padding:10px 14px;font:inherit;font-family:var(--ui);border:1.5px solid var(--line);border-radius:999px;background:var(--paper);color:var(--ink)}
+#tans{white-space:pre-wrap;font-family:var(--body);line-height:1.85;margin-top:10px}
+.sugg button{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:3px 12px;font-size:.82rem;cursor:pointer}
+.media{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px}
+.media div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-family:var(--ui)}
+.media b{display:block;font-size:.95rem;margin-bottom:6px}
+.media a{display:inline-block;font-size:.8rem;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:2px 11px;margin-right:6px}
+.done{margin-left:10px;vertical-align:middle;font-size:.78rem;padding:3px 12px}
+.meter{height:10px;background:var(--line);border-radius:999px;overflow:hidden;margin:8px 0}.meter i{display:block;height:100%;background:var(--manjal);width:0;transition:width .3s}
+</style>
+<script type="text/plain" id="mediadata">
+history|கீழடி அகழாய்வு|Keezhadi excavation
+history|மாமல்லபுரம் கடற்கரைக் கோயில்|Shore Temple Mahabalipuram
+history|தஞ்சைப் பெருவுடையார் கோயில்|Brihadisvara Temple Thanjavur
+history|கங்கைகொண்ட சோழபுரம்|Gangaikonda Cholapuram
+history|கல்லணை|Kallanai Dam
+history|செஞ்சிக் கோட்டை|Gingee Fort
+language|தமிழி (தமிழ்ப் பிராமி) கல்வெட்டு|Tamil-Brahmi inscription
+language|ஓலைச்சுவடி|Tamil palm leaf manuscript
+language|வட்டெழுத்து|Vatteluttu
+literature|திருவள்ளுவர் சிலை, கன்னியாகுமரி|Thiruvalluvar Statue Kanyakumari
+literature|கண்ணகி சிலை|Kannagi statue
+literature|பாரதியார்|Subramania Bharati
+literature|உ.வே. சாமிநாதையர்|U. V. Swaminatha Iyer
+culture|கோலம்|Kolam
+culture|வாழையிலை விருந்து|Banana leaf meal Tamil Nadu
+culture|காஞ்சிபுரம் பட்டு|Kanchipuram silk sari
+culture|செட்டிநாட்டு வீடு|Chettinad mansion
+culture|தமிழ்த் திருமணம்|Tamil wedding
+faith|ஐயனார் சுடுமண் குதிரைகள்|Ayyanar terracotta horses
+faith|மதுரை மீனாட்சி அம்மன் கோயில்|Meenakshi Amman Temple
+faith|சிதம்பரம் நடராசர் கோயில்|Chidambaram Nataraja Temple
+faith|வேளாங்கண்ணி மாதா கோயில்|Velankanni Basilica
+faith|நாகூர் தர்கா|Nagore Dargah
+faith|வடலூர் சத்திய ஞான சபை|Sathya Gnana Sabha Vadalur
+arts|பரதநாட்டியம்|Bharatanatyam
+arts|தெருக்கூத்து|Therukoothu
+arts|நாதஸ்வரம், தவில்|Nadaswaram
+arts|பறையாட்டம்|Parai attam
+arts|கரகாட்டம்|Karakattam
+arts|சோழர் செப்புத் திருமேனி|Chola bronze Nataraja
+arts|தஞ்சாவூர் ஓவியம்|Thanjavur painting
+games|சிலம்பம்|Silambam
+games|சல்லிக்கட்டு|Jallikattu
+games|பல்லாங்குழி|Pallanguzhi
+games|ஆடுபுலி ஆட்டம்|Aadu puli attam
+games|கபடி|Kabaddi Tamil Nadu
+games|உறியடி|Uriyadi
+festivals|பொங்கல்|Pongal festival
+festivals|திருவண்ணாமலை கார்த்திகை தீபம்|Karthigai Deepam Tiruvannamalai
+festivals|பத்துமலை தைப்பூசம்|Thaipusam Batu Caves
+festivals|மதுரை சித்திரைத் திருவிழா|Chithirai festival Madurai
+festivals|திருவாரூர் ஆழித்தேர்|Thiruvarur chariot festival
+knowledge|சுவாமிமலை சிலை வார்ப்பு|Swamimalai bronze casting
+knowledge|கைத்தறி நெசவு|Handloom weaving Tamil Nadu
+knowledge|கட்டுமரம்|Catamaran Tamil Nadu fishing
+knowledge|சித்த மருத்துவம்|Siddha medicine
+world|நல்லூர்க் கந்தசுவாமி கோயில், யாழ்ப்பாணம்|Nallur Kandaswamy temple
+world|மலையகத் தேயிலைத் தோட்டம்|Tea plantation Nuwara Eliya
+world|லிட்டில் இந்தியா, சிங்கப்பூர்|Little India Singapore
+world|கன்னியாகுமரி|Kanyakumari
+world|நீலகிரி|Nilgiris
+</script>
+<script>
+window.TKDYN=function(A){
+const $=A.$,esc=A.esc,reduce=A.reduce;
+const t=(a,b)=>A.en?b:a;
+const QEN=[["How many couplets are there in the Tirukkural?",["1330","133","1000","400"],"literature"],["How many letters does the Tamil script have in all?",["247","216","30","18"],"language"],["Which king is credited with building the Kallanai?",["Karikala Chola","Rajaraja Chola","Nedunchezhiyan","Mahendravarman"],"history"],["Who built the great temple at Thanjavur?",["Rajaraja I","Rajendra I","Karikala","Narasimhavarman"],"history"],["Which land belongs to the Kurinji landscape?",["Mountain","Forest","Farmland","Seashore"],"language"],["Which is the first Tamil novel?",["Prathapa Mudaliar Charithram","Ponniyin Selvan","Kamalambal Charithram","Mogamul"],"literature"],["Who composed the Silappatikaram?",["Ilango Adigal","Kambar","Seethalai Sathanar","Sekkizhar"],"literature"],["Who is called the 'grandfather of Tamil'?",["U.V. Swaminatha Iyer","Maraimalai Adigal","Bharati","Thiru.Vi.Ka."],"literature"],["Pongal falls on the first day of which month?",["Thai","Chithirai","Margazhi","Aadi"],"festivals"],["How many pits does a pallanguzhi board have?",["14","12","10","16"],"games"],["Who sang 'Every town is our town, everyone is our kin'?",["Kaniyan Poongundranar","Tiruvalluvar","Avvaiyar","Kapilar"],"literature"],["In which year was Madras State renamed Tamil Nadu?",["1969","1947","1956","1967"],"history"]];
+const TEN=[{n:"Kurinji",d:[["Land","Mountains and the country around them"],["Theme","Union of lovers"],["Deity","Seyon (Murugan)"],["People","Kuravar, Kanavar"],["Work","Gathering honey, growing millet, digging roots"],["Flowers","Kurinji, glory lily"],["Creatures","Elephant, tiger, peacock, parrot"]]},{n:"Mullai",d:[["Land","Forest and the country around it"],["Theme","Patient waiting for the one who is away"],["Deity","Mayon"],["People","Ayar, Idaiyar (herders)"],["Work","Herding cattle, growing millets"],["Flowers","Jasmine (mullai), thondri"],["Creatures","Deer, hare, jungle fowl"]]},{n:"Marutham",d:[["Land","Fields and the country around them"],["Theme","Lovers' quarrel"],["Deity","Vendan"],["People","Uzhavar (farmers)"],["Work","Growing paddy, weeding"],["Flowers","Lotus, red water lily"],["Creatures","Buffalo, otter, stork"]]},{n:"Neithal",d:[["Land","The sea and the shore"],["Theme","Pining in separation"],["Deity","Varunan"],["People","Parathavar, Nulaiyar (fishers)"],["Work","Fishing, making salt"],["Flowers","Water lily (neithal), screw pine"],["Creatures","Shark, sea crow"]]},{n:"Paalai",d:[["Land","Mountain and forest parched by drought; no land of its own"],["Theme","Separation"],["Deity","Kotravai"],["People","Eyinar, Maravar"],["Work","Cattle raiding, waylaying travellers"],["Flowers","Kuravam, pathiri"],["Creatures","Wild dog, kite, dove"]]}];
+const LEN=["Salt","Pickle","Pachadi","Kootu","Poriyal (dry vegetable)","Aviyal","Appalam, vadai","Banana, sweet","Rice (with dal and ghee; then sambar, rasam, buttermilk)","Payasam"];
+const EEN=["Sangam age","Kalabhras","Pallavas, Pandyas","Imperial Cholas","Pandyas, Nayaks, Marathas","Europeans","Today"];
+
+const LS={get(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const el=(h)=>{const d=document.createElement("div");d.innerHTML=h;return d.firstElementChild;};
+const before=(view,h2text,node)=>{const h=[...$(view).querySelectorAll("h2")].find(x=>x.textContent.startsWith(h2text));if(h)h.before(node);else $(view).appendChild(node);};
+
+/* ---- kolam generator (shared) ---- */
+function kolam(c,N,animate){
+  const g=c.getContext("2d"),R=[];for(let i=1;i<=N;i+=2)R.push(i);for(let i=N-2;i>=1;i-=2)R.push(i);
+  const m=(N-1)/2,dots=[],set=new Set();
+  R.forEach((w,y)=>{for(let k=0;k<w;k++){const x=m-(w-1)/2+k;dots.push([x,y]);set.add(x+","+y);}});
+  dots.sort((a,b)=>(Math.abs(a[0]-m)+Math.abs(a[1]-m))-(Math.abs(b[0]-m)+Math.abs(b[1]-m)));
+  const d=devicePixelRatio||1,w=c.clientWidth||280;c.width=c.height=w*d;g.setTransform(d,0,0,d,0,0);
+  const s=w/(N+1.2),o=(w-(N-1)*s)/2;let t0=null;const id=(c._k=(c._k||0)+1);
+  function loop(x,y){const X=o+x*s,Y=o+y*s,h=s/2,q=s/4,r=s*.21;
+    const V=[[X,Y-h,set.has(x+","+(y-1))],[X+h,Y,set.has((x+1)+","+y)],[X,Y+h,set.has(x+","+(y+1))],[X-h,Y,set.has((x-1)+","+y)]];
+    const M=[[X+q,Y-q],[X+q,Y+q],[X-q,Y+q],[X-q,Y-q]];
+    g.beginPath();g.moveTo(X-q,Y-q);
+    V.forEach((v,i)=>{if(v[2]){g.lineTo(v[0],v[1]);g.lineTo(M[i][0],M[i][1]);}else g.arcTo(v[0],v[1],M[i][0],M[i][1],r);});g.closePath();}
+  function frame(ts){if(c._k!==id)return;if(t0===null)t0=ts;const T=(!animate||reduce)?1:Math.min(1,(ts-t0)/(250*N+600));
+    g.clearRect(0,0,w,w);g.lineCap=g.lineJoin="round";g.strokeStyle="#fbf6ee";g.lineWidth=Math.max(1.5,s*.075);
+    const per=4*s*.72,f=T*dots.length;
+    dots.forEach((p,i)=>{const k=Math.max(0,Math.min(1,f-i));if(k<=0)return;loop(p[0],p[1]);g.setLineDash(k<1?[per*k,per*2]:[]);g.stroke();});
+    g.setLineDash([]);g.fillStyle="#e7b23c";dots.forEach(p=>{g.beginPath();g.arc(o+p[0]*s,o+p[1]*s,Math.max(1.5,s*.06),0,7);g.fill();});
+    if(T<1)requestAnimationFrame(frame);}
+  requestAnimationFrame(frame);return dots.length;
+}
+
+/* ---- home: daily kural ---- */
+(function(){
+  const K=[...$("v-literature").querySelectorAll(".verse")].filter(v=>/^(குறள்|Kural)/.test((v.querySelector("cite")||{}).textContent||"")).map(v=>{const c=v.querySelector("cite").textContent;const t=v.cloneNode(true);t.querySelector("cite").remove();return{h:t.innerHTML,c};});
+  if(!K.length)return;let i=Math.floor(Date.now()/864e5)%K.length;
+  const p=el(`<div><h2>${t("இன்றைய குறள்","Kural of the day")}</h2><div class="panel"><div class="kd" id="kdt"></div><div class="row"><button type="button" class="btn ghost" id="kdn">${t("மற்றொரு குறள்","Another Kural")}</button><a href="#literature" class="btn ghost" style="text-decoration:none">${t("மேலும் பாடல்கள்","More verses")}</a></div></div></div>`);
+  $("tiles").parentNode.insertBefore(p,$("tiles").previousElementSibling);
+  const show=()=>{$("kdt").innerHTML=K[i].h+`<small>${esc(K[i].c)}</small>`;};
+  p.querySelector("#kdn").onclick=()=>{i=(i+1)%K.length;show();};show();
+})();
+
+/* ---- home: quiz ---- */
+(function(){
+  const Q=[["திருக்குறளில் மொத்தம் எத்தனை குறள்கள்?",["1330","133","1000","400"],"literature"],["தமிழ் எழுத்துகள் மொத்தம் எத்தனை?",["247","216","30","18"],"language"],["கல்லணையைக் கட்டியதாகக் கருதப்படும் மன்னன் யார்?",["கரிகால் சோழன்","இராஜராஜ சோழன்","நெடுஞ்செழியன்","மகேந்திரவர்மன்"],"history"],["தஞ்சைப் பெருவுடையார் கோயிலைக் கட்டியவன் யார்?",["முதலாம் இராஜராஜன்","முதலாம் இராஜேந்திரன்","கரிகாலன்","நரசிம்மவர்மன்"],"history"],["குறிஞ்சித் திணையின் நிலம் எது?",["மலை","காடு","வயல்","கடற்கரை"],"language"],["தமிழின் முதல் நாவல் எது?",["பிரதாப முதலியார் சரித்திரம்","பொன்னியின் செல்வன்","கமலாம்பாள் சரித்திரம்","மோகமுள்"],"literature"],["சிலப்பதிகாரத்தை இயற்றியவர் யார்?",["இளங்கோவடிகள்","கம்பர்","சீத்தலைச் சாத்தனார்","சேக்கிழார்"],"literature"],["'தமிழ்த் தாத்தா' என்று அழைக்கப்படுபவர் யார்?",["உ.வே. சாமிநாதையர்","மறைமலையடிகள்","பாரதியார்","திரு.வி.க."],"literature"],["பொங்கல் எந்த மாதத்தின் முதல் நாள்?",["தை","சித்திரை","மார்கழி","ஆடி"],"festivals"],["பல்லாங்குழிப் பலகையில் எத்தனை குழிகள்?",["14","12","10","16"],"games"],["'யாதும் ஊரே யாவரும் கேளிர்' என்று பாடியவர் யார்?",["கணியன் பூங்குன்றனார்","திருவள்ளுவர்","ஔவையார்","கபிலர்"],"literature"],["சென்னை மாநிலம் 'தமிழ்நாடு' எனப் பெயர் பெற்ற ஆண்டு எது?",["1969","1947","1956","1967"],"history"]];if(A.en)Q.splice(0,Q.length,...QEN);
+  const p=el(`<div><h2>${t("வினாடி வினா","Quiz")}</h2><div class="panel" id="qz"></div></div>`);$("tiles").parentNode.insertBefore(p,$("tiles").nextElementSibling);
+  let set,n,score;const sh=a=>a.map(x=>[Math.random(),x]).sort((a,b)=>a[0]-b[0]).map(x=>x[1]);
+  function start(){set=sh(Q).slice(0,5);n=0;score=0;ask();}
+  function ask(){const q=set[n],box=$("qz");
+    box.innerHTML=`<div style="font-size:.8rem;color:var(--muted)">${t("கேள்வி","Question")} ${n+1} / 5 · ${t("மதிப்பெண்","Score")} ${score}</div><div class="kd" style="font-size:1.05rem">${esc(q[0])}</div><div class="opts">${sh(q[1]).map(o=>`<button type="button">${esc(o)}</button>`).join("")}</div><div id="qzf"></div>`;
+    box.querySelectorAll(".opts button").forEach(b=>b.onclick=()=>{const ok=b.textContent===q[1][0];if(ok)score++;
+      box.querySelectorAll(".opts button").forEach(x=>{x.disabled=true;if(x.textContent===q[1][0])x.classList.add("ok");});if(!ok)b.classList.add("no");
+      $("qzf").innerHTML=`<div class="row"><span>${ok?t("சரி!","Correct!"):t("சரியான விடை: ","Correct answer: ")+esc(q[1][0])}</span><a href="#${q[2]}" style="font-size:.85rem">${t("இதைப் பற்றிப் படிக்க","Read about this")}</a><button type="button" class="btn" style="margin-left:auto">${n<4?t("அடுத்த கேள்வி","Next question"):t("முடிவு","Finish")}</button></div>`;
+      $("qzf").querySelector("button").onclick=()=>{n++;n<5?ask():end();};});}
+  function end(){$("qz").innerHTML=`<div class="kd">${t("உங்கள் மதிப்பெண்","Your score")}: ${score} / 5</div><p style="margin:4px 0 10px;font-size:.9rem">${score===5?t("அருமை! முழு மதிப்பெண்.","Excellent! Full marks."):score>=3?t("நன்று. இன்னும் கொஞ்சம் படித்தால் முழு மதிப்பெண்.","Good. A little more reading and you will have full marks."):t("இயல்களைப் படித்துவிட்டு மீண்டும் முயலுங்கள்.","Read the chapters and try again.")}</p><button type="button" class="btn">${t("புதிய கேள்விகள்","New questions")}</button>`;$("qz").querySelector("button").onclick=start;}
+  start();
+})();
+
+/* ---- history: era strip ---- */
+(function(){
+  const E=[["சங்க காலம்",-300,300,1,"#8a1838"],["களப்பிரர்",300,600,2,"#6d5a7a"],["பல்லவர், பாண்டியர்",600,850,2,"#a2542b"],["பேரரசுச் சோழர்",850,1279,3,"#9a6b00"],["பாண்டியர், நாயக்கர், மராட்டியர்",1279,1800,4,"#3f6b5c"],["ஐரோப்பியர்",1800,1947,5,"#44557d"],["இன்று",1947,2026,6,"#8a1838"]];if(A.en)EEN.forEach((x,i)=>E[i][0]=x);
+  const v=$("v-history"),hs=[...v.querySelectorAll("h2")];
+  const p=el(`<div class="panel"><h3>${t("காலக்கோடு: தொட்டால் அந்தக் காலத்துக்குச் செல்லும்","Timeline: tap an era to jump to it")}</h3><div class="eras"><div class="strip">${E.map((e,i)=>`<button type="button" data-i="${i}" style="flex:${Math.max(e[2]-e[1],170)};background:${e[4]}">${e[0]}<br>${e[1]<0?t("கி.மு. ","")+(-e[1])+t(" – கி.பி. "," BCE – ")+e[2]+t(""," CE"):e[1]+" – "+e[2]}</button>`).join("")}</div></div><div style="font-size:.78rem;color:var(--muted)">${t("குறுகிய காலங்கள் படிக்கத் தக்க அளவுக்கு அகலமாக்கப்பட்டுள்ளன; அளவுகோல் தோராயமானது.","Short eras are widened to stay readable; the scale is approximate.")}</div></div>`);
+  hs[0].before(p);p.querySelectorAll("button").forEach(b=>b.onclick=()=>A.go(hs[E[b.dataset.i][3]]));
+})();
+
+/* ---- language: five landscapes ---- */
+(function(){
+  const sky=(a,b)=>`<defs><linearGradient id="G" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="120" height="70" fill="url(#G)"/>`;
+  const T=[
+   {n:"குறிஞ்சி",s:sky("#bfd9ee","#e8f1f5")+'<circle cx="96" cy="14" r="6" fill="#fff3c4"/><path d="M0 70L28 22l18 26 20-36 30 40 24-18v36z" fill="#5b7f6a"/><path d="M0 70L20 44l22 16 26-20 30 18 22-10v22z" fill="#3e6351"/><g fill="#7b5ea7"><circle cx="18" cy="62" r="2"/><circle cx="30" cy="65" r="2"/><circle cx="52" cy="61" r="2"/><circle cx="80" cy="64" r="2"/><circle cx="100" cy="62" r="2"/></g>',
+    d:[["நிலம்","மலையும் மலை சார்ந்த இடமும்"],["உரிப்பொருள்","புணர்தல் (காதலர் கூடுதல்)"],["தெய்வம்","சேயோன் (முருகன்)"],["மக்கள்","குறவர், கானவர்"],["தொழில்","தேன் எடுத்தல், தினை விளைத்தல், கிழங்கு அகழ்தல்"],["மலர்","குறிஞ்சி, காந்தள்"],["உயிரினம்","யானை, புலி, மயில், கிளி"]]},
+   {n:"முல்லை",s:sky("#cfe6d2","#eef6e6")+'<rect y="50" width="120" height="20" fill="#7fa35c"/><g fill="#6b4a2b"><rect x="18" y="34" width="4" height="20"/><rect x="52" y="28" width="5" height="26"/><rect x="92" y="36" width="4" height="18"/></g><g fill="#2f6b3c"><circle cx="20" cy="30" r="12"/><circle cx="54" cy="22" r="15"/><circle cx="94" cy="32" r="11"/></g><g fill="#fff"><circle cx="34" cy="60" r="1.6"/><circle cx="70" cy="58" r="1.6"/><circle cx="78" cy="63" r="1.6"/><circle cx="108" cy="60" r="1.6"/></g><ellipse cx="72" cy="52" rx="7" ry="4" fill="#c9a27a"/><circle cx="79" cy="49" r="2.500" fill="#c9a27a"/>',
+    d:[["நிலம்","காடும் காடு சார்ந்த இடமும்"],["உரிப்பொருள்","இருத்தல் (பிரிந்தவர் வரவுக்காகக் காத்திருத்தல்)"],["தெய்வம்","மாயோன்"],["மக்கள்","ஆயர், இடையர்"],["தொழில்","ஆநிரை மேய்த்தல், வரகு, சாமை விளைத்தல்"],["மலர்","முல்லை, தோன்றி"],["உயிரினம்","மான், முயல், காட்டுக்கோழி"]]},
+   {n:"மருதம்",s:sky("#bfe0f2","#f4f7df")+'<circle cx="22" cy="14" r="7" fill="#f5c542"/><rect y="38" width="120" height="32" fill="#8fbf5a"/><path d="M0 48h120M0 58h120" stroke="#5f9140" stroke-width="2"/><path d="M0 44c20-6 40 6 60 0s40-6 60 0v6c-20-6-40 6-60 0s-40-6-60 0z" fill="#5aa7d6"/><g stroke="#e3c54a" stroke-width="1.500"><path d="M12 68v-8M24 68v-8M36 68v-8M48 68v-8M60 68v-8M72 68v-8M84 68v-8M96 68v-8M108 68v-8"/></g><path d="M84 30l10-8 10 8v8H84z" fill="#b5653a"/>',
+    d:[["நிலம்","வயலும் வயல் சார்ந்த இடமும்"],["உரிப்பொருள்","ஊடல் (காதலரிடையே சிறு பிணக்கு)"],["தெய்வம்","வேந்தன்"],["மக்கள்","உழவர், உழத்தியர்"],["தொழில்","நெல் விளைத்தல், களை பறித்தல்"],["மலர்","தாமரை, செங்கழுநீர்"],["உயிரினம்","எருமை, நீர்நாய், நாரை"]]},
+   {n:"நெய்தல்",s:sky("#a9d3ee","#dff0f7")+'<circle cx="92" cy="16" r="7" fill="#fff0b3"/><rect y="34" width="120" height="24" fill="#2f7fb5"/><path d="M0 40c10-4 20 4 30 0s20-4 30 0 20 4 30 0 20-4 30 0M0 48c10-4 20 4 30 0s20-4 30 0 20 4 30 0 20-4 30 0" stroke="#cfe9f7" fill="none"/><path d="M0 56c30-6 90-6 120 0v14H0z" fill="#ecd9a6"/><path d="M40 38h30l-5 6H45z" fill="#6b3f22"/><path d="M55 38V22l12 14z" fill="#fbf6ee"/>',
+    d:[["நிலம்","கடலும் கடல் சார்ந்த இடமும்"],["உரிப்பொருள்","இரங்கல் (பிரிவை எண்ணி வருந்துதல்)"],["தெய்வம்","வருணன்"],["மக்கள்","பரதவர், நுளையர்"],["தொழில்","மீன் பிடித்தல், உப்பு விளைத்தல்"],["மலர்","நெய்தல், தாழை"],["உயிரினம்","சுறா, கடற்காகம்"]]},
+   {n:"பாலை",s:sky("#f6d9a8","#fbead0")+'<circle cx="60" cy="16" r="10" fill="#f08a3c"/><path d="M0 70V50c20-10 40-10 60 0s40 10 60 0v20z" fill="#d9a45b"/><path d="M0 70V60c25-8 45 4 70 0s35-6 50-2v12z" fill="#c4863e"/><path d="M30 56V40M30 46l-7-6M30 44l6-7M30 50l8-4" stroke="#5a3a1e" stroke-width="1.800" fill="none"/>',
+    d:[["நிலம்","மழையின்றி வறண்ட குறிஞ்சியும் முல்லையும்; தனி நிலம் இல்லை"],["உரிப்பொருள்","பிரிதல்"],["தெய்வம்","கொற்றவை"],["மக்கள்","எயினர், மறவர்"],["தொழில்","நிரை கவர்தல், வழிப்பறி"],["மலர்","குரவம், பாதிரி"],["உயிரினம்","செந்நாய், பருந்து, புறா"]]}
+  ];if(A.en)T.forEach((x,i)=>{x.n=TEN[i].n;x.d=TEN[i].d;});
+  const svg=s=>`<svg viewBox="0 0 120 70" role="img">${s}</svg>`;
+  const p=el(`<div class="panel"><h3>${t("ஐந்து நிலங்கள்: ஒரு நிலத்தைத் தொடுங்கள்","The five lands: tap one")}</h3><div class="tinai">${T.map((t,i)=>`<button type="button" data-i="${i}" aria-pressed="${!i}">${svg(t.s.replace(/id="G"/,'id="g'+i+'"').replace("url(#G)","url(#g"+i+")"))}<span>${t.n}</span></button>`).join("")}</div><div class="tbig" id="tbig"></div></div>`);
+  const tw=[...$("v-language").querySelectorAll("h3")].find(x=>x.textContent===t("ஐந்திணை","The five landscapes"));(tw?tw.nextElementSibling:$("v-language").lastChild).after(p);
+  const show=i=>{p.querySelectorAll(".tinai button").forEach((b,j)=>b.setAttribute("aria-pressed",j===i));const t=T[i];
+    $("tbig").innerHTML=svg(t.s.replace(/id="G"/,'id="gb"').replace("url(#G)","url(#gb)"))+`<dl class="kv">${t.d.map(x=>`<dt>${x[0]}</dt><dd>${x[1]}</dd>`).join("")}</dl>`;};
+  p.querySelectorAll(".tinai button").forEach(b=>b.onclick=()=>show(+b.dataset.i));show(0);
+})();
+
+/* ---- culture: banana-leaf meal + kolam lab ---- */
+(function(){
+  const it=[["உப்பு",40,30],["ஊறுகாய்",62,24],["பச்சடி",86,20],["கூட்டு",112,18],["பொரியல்",140,18],["அவியல்",168,20],["அப்பளம், வடை",196,26],["வாழைப்பழம், இனிப்பு",40,62],["சோறு (பருப்பு, நெய்; பின் சாம்பார், ரசம், மோர்)",120,62],["பாயசம்",200,60]];if(A.en)it.forEach((x,i)=>x[0]=LEN[i]);
+  const leaf=el(`<div class="panel leaf"><h3>${t("வாழையிலை விருந்து: எது எங்கே","The banana-leaf meal: what goes where")}</h3><svg viewBox="0 0 240 100" role="img" aria-label="${t("வாழையிலையில் உணவு பரிமாறும் இடங்கள்","Where each dish is served on the banana leaf")}"><path d="M8 50C30 6 190 2 234 46c-40 46-200 46-226 4z" fill="#3f8f4a"/><path d="M8 50C80 42 170 40 234 46" stroke="#2c6a36" stroke-width="2" fill="none"/><ellipse cx="120" cy="64" rx="34" ry="14" fill="#fbf6ee"/>${it.map((x,i)=>`<circle cx="${x[1]}" cy="${x[2]}" r="8" fill="${i===8?"#e7b23c":"#fbf6ee"}" stroke="#27131a" stroke-width=".6"/><text x="${x[1]}" y="${x[2]+3}" text-anchor="middle" font-size="8" font-family="sans-serif" fill="#27131a">${i+1}</text>`).join("")}</svg><ol>${it.map(x=>`<li>${x[0]}</li>`).join("")}</ol><div style="font-size:.78rem;color:var(--muted);margin-top:6px">${t("உண்பவரின் பார்வையில்: இலையின் நுனி இடப்புறம். இது பொதுவான அமைப்பு; வட்டாரத்துக்கும் குடும்பத்துக்கும் ஏற்ப மாறும்.","Seen from the diner's side: the tip of the leaf is on the left. This is a common layout; it varies by region and family.")}</div></div>`);
+  before("v-culture",t("உடையும் அணியும்","Dress and adornment"),leaf);
+  const lab=el(`<div class="panel klab"><h3>${t("கோலம் போட்டுப் பாருங்கள்","Draw a kolam")}</h3><div class="row"><span style="font-size:.85rem">${t("நடு வரிசைப் புள்ளிகள்:","Dots in the middle row:")}</span>${[3,5,7,9,11].map(n=>`<button type="button" class="btn ghost" data-n="${n}">${n}</button>`).join("")}</div><canvas id="klc" aria-label="${t("புள்ளிக் கோலம்","Dot kolam")}"></canvas><div id="kln" style="font-size:.85rem;text-align:center"></div></div>`);
+  before("v-culture",t("காலக் கணக்கு","Reckoning time"),lab);
+  let cur=5;const draw=(n,an)=>{cur=n;lab.querySelectorAll("button").forEach(b=>{b.className="btn"+(+b.dataset.n===n?"":" ghost");});
+    const k=kolam($("klc"),n,an);$("kln").textContent=A.en?`${n} dots in the middle row · ${k} dots in all`:`நடு வரிசையில் ${n} புள்ளிகள் · மொத்தம் ${k} புள்ளிகள்`;};
+  lab.querySelectorAll("button").forEach(b=>b.onclick=()=>draw(+b.dataset.n,true));
+  A.onView("culture",()=>draw(cur,true));
+})();
+
+/* ---- games: playable pallanguzhi (simplified) ---- */
+(function(){
+  const LA=t("நீங்கள் (கீழ் வரிசை): ","You (bottom row): "),LB=t("எதிராளி (மேல் வரிசை): ","Opponent (top row): ");
+  const box=el(`<div class="panel"><h3>${t("பல்லாங்குழி ஆடிப் பாருங்கள்","Play pallanguzhi")}</h3><div class="score"><b id="pA">${LA}0</b><b id="pB">${LB}0</b></div><div class="pb" id="pb"></div><div id="pmsg" style="font-size:.9rem;min-height:1.6em"></div><div class="row"><button type="button" class="btn ghost" id="prs">${t("புதிய ஆட்டம்","New game")}</button></div><div style="font-size:.78rem;color:var(--muted);margin-top:8px">${t("எளிய வடிவம்: இருவர் ஒரே திரையில் மாறி மாறி ஆடலாம். ஒவ்வொரு குழியிலும் 6 காய். பசு, தக்கம் விதிகள் இதில் இல்லை.","Simplified: two players take turns on one screen. Six counters per pit. The pasu and closed-pit rules are left out.")}</div></div>`);
+  const anchor=[...$("v-games").querySelectorAll("p")].find(x=>x.textContent.startsWith(t("எண்ணுதல், கணக்கிடுதல்","It trains a child")));(anchor||$("v-games").lastChild).after(box);
+  let P,S,turn,run;const order=[13,12,11,10,9,8,7,0,1,2,3,4,5,6];
+  const own=i=>i<7?0:1,wait=ms=>new Promise(r=>setTimeout(r,reduce?0:ms));
+  function paint(hot){$("pb").innerHTML=order.map(i=>`<button type="button" data-i="${i}" class="${own(i)===turn&&!run?"mine":""} ${i===hot?"hot":""}" ${run||own(i)!==turn||!P[i]?"disabled":""} aria-label="${t("குழி, காய்கள்:","Pit, counters:")} ${P[i]}">${P[i]}</button>`).join("");
+    $("pA").textContent=LA+S[0];$("pB").textContent=LB+S[1];$("pA").className=turn===0?"on":"";$("pB").className=turn===1?"on":"";}
+  function reset(){P=Array(14).fill(6);S=[0,0];turn=0;run=false;$("pmsg").textContent=t("கீழ் வரிசையில் ஒரு குழியைத் தொடுங்கள்.","Tap a pit in the bottom row.");paint();}
+  async function play(i){run=true;let hand=P[i];P[i]=0;let pos=i,steps=0;
+    while(steps++<400){
+      while(hand>0){pos=(pos+1)%14;P[pos]++;hand--;paint(pos);await wait(170);}
+      const nx=(pos+1)%14;
+      if(P[nx]>0){hand=P[nx];P[nx]=0;pos=nx;paint(pos);await wait(260);continue;}
+      const cap=(nx+1)%14;const got=P[cap];S[turn]+=got;P[cap]=0;
+      $("pmsg").textContent=got?(A.en?`${turn?"Top row wins":"Bottom row wins"} the ${got} counters beyond the empty pit.`:`வெறுங்குழிக்கு அடுத்த குழியின் ${got} காய்கள் ${turn?"எதிராளிக்கு":"உங்களுக்கு"}.`):t("வெறுங்குழி; காய் கிடைக்கவில்லை.","Empty pit; nothing won.");break;}
+    turn=1-turn;run=false;
+    const mine=k=>P.slice(k*7,k*7+7).reduce((a,b)=>a+b,0);
+    if(!mine(turn)){S[1-turn]+=mine(1-turn);P.fill(0);paint();$("pmsg").textContent=S[0]===S[1]?t("ஆட்டம் சமம்.","A draw."):(S[0]>S[1]?t("கீழ் வரிசை வென்றது!","Bottom row wins!"):t("மேல் வரிசை வென்றது!","Top row wins!"))+t(" புதிய ஆட்டம் தொடங்கலாம்."," Start a new game.");return;}
+    $("pmsg").textContent+=t(" இப்போது "+(turn?"மேல்":"கீழ்")+" வரிசையின் முறை."," Now the "+(turn?"top":"bottom")+" row plays.");paint();}
+  box.querySelector("#pb").addEventListener("click",e=>{const b=e.target.closest("button");if(!b||run||b.disabled)return;play(+b.dataset.i);});
+  box.querySelector("#prs").onclick=()=>{if(!run)reset();};reset();
+})();
+
+/* ---- learning path: mark stages done ---- */
+(function(){
+  const v=$("v-path"),hs=[...v.querySelectorAll("h2")].filter(h=>h.textContent.startsWith(t("நிலை","Stage")));let done=LS.get("tk-path",[]);const BT=[];
+  const m=el(`<div class="panel"><b id="pthl"></b><div class="meter"><i id="pthm"></i></div><div style="font-size:.78rem;color:var(--muted)">${t("முடித்த நிலைகளைக் குறித்து வையுங்கள். இக்குறிப்பு இந்தக் கருவியில் மட்டும் சேமிக்கப்படும்.","Mark the stages you have finished. This is saved on this device only.")}</div></div>`);hs[0].before(m);
+  const upd=()=>{$("pthl").textContent=A.en?`${done.length} of ${hs.length} stages done`:`${hs.length} நிலைகளில் ${done.length} முடிந்தன`;$("pthm").style.width=(done.length/hs.length*100)+"%";
+    hs.forEach((h,i)=>{const b=BT[i];b.textContent=done.includes(i)?t("✓ முடித்தேன்","✓ Done"):t("முடித்ததாகக் குறி","Mark as done");b.className="btn done"+(done.includes(i)?"":" ghost");});};
+  hs.forEach((h,i)=>{const b=document.createElement("button");b.type="button";b.style.margin="0 0 8px";h.after(b);BT.push(b);b.onclick=()=>{done=done.includes(i)?done.filter(x=>x!==i):done.concat(i);LS.set("tk-path",done);upd();};});upd();
+})();
+
+/* ---- every chapter: photo and video links ---- */
+(function(){
+  const M={};$("mediadata").textContent.split("\n").map(s=>s.trim()).filter(Boolean).forEach(l=>{const p=l.split("|");(M[p[0]]=M[p[0]]||[]).push(p);});
+  Object.keys(M).forEach(k=>{const v=$("v-"+k);if(!v)return;const d=document.createElement("div");
+    d.innerHTML=`<h2>${t("படங்களும் காணொளிகளும்","Photos and videos")}</h2><p style="font-family:var(--ui);font-size:.86rem;color:var(--muted)">${t("இணைப்புகள் விக்கிமீடியா பொதுவகத்தின் படத் தேடலையும் யூடியூப் தேடலையும் புதிய பக்கத்தில் திறக்கும். அங்கே காண்பவை இந்தக் களஞ்சியத்தால் சரிபார்க்கப்பட்டவை அல்ல.","These links open a Wikimedia Commons image search and a YouTube search in a new tab. What you find there has not been checked by this treasury.")}</p><div class="media">${M[k].map(p=>`<div><b>${esc(A.en?p[2]:p[1])}</b><a href="https://commons.wikimedia.org/w/index.php?title=Special:MediaSearch&type=image&search=${encodeURIComponent(p[2])}" target="_blank" rel="noopener">${t("படங்கள்","Photos")}</a><a href="https://www.youtube.com/results?search_query=${encodeURIComponent(A.en?p[2]:p[1])}" target="_blank" rel="noopener">${t("காணொளிகள்","Videos")}</a></div>`).join("")}</div>`;
+    v.appendChild(d);});
+})();
+};
+</script>
