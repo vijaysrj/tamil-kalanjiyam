@@ -233,6 +233,18 @@ tr:nth-child(odd) td{background:color-mix(in srgb,var(--acc) 4%,transparent)}
 .paths a{color:#fff;box-shadow:0 6px 16px rgba(0,0,0,.12)}
 #v-home .panel{border-top-color:var(--manjal)}
 #gq:focus,#q:focus{border-color:var(--acc,var(--arakku))}
+/* newcomer clarity: say what this is before anything else */
+.hero{position:relative;grid-template-columns:1fr}
+.hero canvas{position:absolute;right:16px;top:16px;width:84px}
+.hero .eyebrow{padding-right:96px}
+.hero .sub{font-size:1.05rem}
+@media (min-width:680px){.hero{grid-template-columns:1.3fr 1fr;align-items:center}.hero canvas{position:static;order:2;width:100%}.hero .eyebrow{padding-right:0}}
+.about{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:8px 0 24px;counter-reset:ab}
+.about div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px;border-top:5px solid var(--manjal);counter-increment:ab}
+.about div:nth-child(1){border-top-color:#8a1838}.about div:nth-child(2){border-top-color:#0f6b7a}.about div:nth-child(3){border-top-color:#b0246a}.about div:nth-child(4){border-top-color:#2e7d32}
+.about b{display:block;font-family:var(--display);font-size:1.08rem;margin-bottom:6px}
+.about p{margin:0;font-size:.95rem;line-height:1.75}
+#v-home h2:first-of-type{margin-top:44px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.view.on{animation:none}.tile{transition:none}}
 </style>
 </head>
@@ -260,13 +272,20 @@ tr:nth-child(odd) td{background:color-mix(in srgb,var(--acc) 4%,transparent)}
 <div class="hero">
   <canvas id="kolam" aria-hidden="true"></canvas>
   <div>
-    <p class="eyebrow">வாசல் திறந்திருக்கிறது</p>
+    <p class="eyebrow">தமிழரைப் பற்றிய அறிமுகக் களஞ்சியம்</p>
     <h1>தமிழ்க் களஞ்சியம்</h1>
-    <p class="sub">தமிழரின் வரலாறு, மொழி, இலக்கியம், பண்பாடு, கலை, அறிவு. தொன்மை முதல் இன்று வரை ஒரே இடத்தில். தமிழ் படிக்கத் தெரிந்தால் போதும்; இங்கிருந்து தொடங்கலாம்.</p>
+    <p class="sub">தமிழர் யார்? அவர்களின் 2,500 ஆண்டு வரலாறு, மொழி, இலக்கியம், பண்பாடு, கலை, விளையாட்டு, விழாக்கள் ஆகியவற்றை எளிய நடையில் விளக்கும் இலவச வழிகாட்டி. முன்னறிவு எதுவும் தேவையில்லை.</p>
     <p style="margin:12px 0 0"><button type="button" class="btn ghost" data-setlang="en" style="color:#fbf6ee;border-color:#e7b23c">Read in English</button></p>
   </div>
 </div>
 
+<h2>இது என்ன?</h2>
+<div class="about">
+  <div><b>தமிழர் யார்?</b><p>எட்டுக் கோடிக்கும் மேற்பட்ட மக்கள். பெரும்பாலோர் தென்னிந்தியாவின் தமிழ்நாட்டிலும் இலங்கையிலும் வாழ்கின்றனர்; மலேசியா, சிங்கப்பூர் உட்பட உலகெங்கும் உள்ளனர். இவர்களின் மொழியான தமிழ், இரண்டாயிரம் ஆண்டுகளுக்கு மேலான எழுத்து மரபுடன் இன்றும் பேசப்படும் மிகப் பழைய மொழிகளில் ஒன்று.</p></div>
+  <div><b>இங்கே என்ன இருக்கிறது?</b><p>ஒரு நூலைப் போலப் படிக்கக்கூடிய 12 சிறு இயல்கள்; இலவச முழுப்பாட இணைப்புகளுடன் 228 முதன்மை நூல்களின் பட்டியல்; செய்து பார்க்க வினாடி வினா, கோலம், பல்லாங்குழி ஆட்டம்.</p></div>
+  <div><b>யாருக்காக?</b><p>மாணவர், ஆசிரியர், வெளிநாட்டில் பிள்ளைகளுக்குத் தமிழ் மரபைக் கற்பிக்க விரும்பும் பெற்றோர், தமிழரைப் பற்றி அறிய விரும்பும் எவரும்.</p></div>
+  <div><b>எப்படிப் பயன்படுத்துவது?</b><p>கீழே உள்ள மூன்று வழிகளில் ஒன்றைத் தேர்ந்தெடுங்கள், அல்லது மேலே உள்ள பட்டையில் ஓர் இயலைத் தொடுங்கள். ஒவ்வோர் இயலும் சுமார் பத்து நிமிட வாசிப்பு. மொழியையும் எழுத்துருவையும் மேலே மாற்றலாம்.</p></div>
+</div>
 <div class="find">
   <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
   <input id="gq" type="search" placeholder="எதைப் பற்றி அறிய வேண்டும்? (எ.கா. பொங்கல், கீழடி, பாரதி)" aria-label="களஞ்சியம் முழுவதும் தேடு">
@@ -1232,13 +1251,20 @@ siruvar|வாண்டுமாமா கதைகள்|வாண்டும�
 <div class="hero">
   <canvas id="kolam" aria-hidden="true"></canvas>
   <div>
-    <p class="eyebrow">THE DOOR IS OPEN</p>
+    <p class="eyebrow">AN INTRODUCTION TO THE TAMIL PEOPLE</p>
     <h1>Tamil Kalanjiyam</h1>
-    <p class="sub">A treasury of the Tamils: history, language, literature, culture, arts and knowledge, from antiquity to today, in one place. No prior knowledge needed. Start here.</p>
+    <p class="sub">Who are the Tamils? A free, plain-language guide to their 2,500-year history, language, literature, culture, arts, games and festivals. No prior knowledge needed. "Kalanjiyam" means treasury.</p>
     <p style="margin:12px 0 0"><button type="button" class="btn ghost" data-setlang="ta" style="color:#fbf6ee;border-color:#e7b23c">தமிழில் படிக்க</button></p>
   </div>
 </div>
 
+<h2>What is this?</h2>
+<div class="about">
+  <div><b>Who are the Tamils?</b><p>A people of more than eighty million. Most live in Tamil Nadu in southern India and in Sri Lanka, with communities in Malaysia, Singapore and around the world. Their language, Tamil, has been written for over two thousand years and is among the oldest languages still spoken today.</p></div>
+  <div><b>What is here?</b><p>Twelve short chapters you can read like a book; a catalogue of 228 major works with links to free full texts; and things to try: a quiz, a kolam maker and a playable pallanguzhi board game.</p></div>
+  <div><b>Who is it for?</b><p>Students, teachers, parents abroad who want to pass on Tamil heritage to their children, and anyone curious about the Tamils.</p></div>
+  <div><b>How do I use it?</b><p>Pick one of the three starting points below, or tap a chapter in the bar at the top. Each chapter is about a ten-minute read. You can switch language and font at the top.</p></div>
+</div>
 <div class="find">
   <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
   <input id="gq" type="search" placeholder="What do you want to know? (e.g. Pongal, Keezhadi, Bharati)" aria-label="Search the whole site">
